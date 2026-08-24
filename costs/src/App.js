@@ -16,7 +16,7 @@ function App() {
         <Link to="/nemproject">Nemproject</Link>
       </div>
       <Switch>
-          <Container>
+          <Container customClass="min-height">
             <Route exact path="/">
               <Home />
             </Route>
