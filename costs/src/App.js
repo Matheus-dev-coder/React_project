@@ -5,16 +5,13 @@ import Contato from './pages/Contact';
 import Nemproject from './pages/Nemproject';
 
 import Container from './layout/Container';
+import Navbar from './layout/Navbar';
+import Footer from './layout/Footer';
 
 function App() {
   return (
     <Router> 
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/company">Company</Link>
-        <Link to="/contato">Contato</Link>
-        <Link to="/nemproject">Nemproject</Link>
-      </div>
+      <Navbar />
       <Switch>
           <Container customClass="min-height">
             <Route exact path="/">
@@ -31,7 +28,7 @@ function App() {
             </Route>
           </Container>
       </Switch>
-      <p>Footer</p>
+      <Footer />
     </Router>
   );
 }
