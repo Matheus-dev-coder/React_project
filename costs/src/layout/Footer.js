@@ -16,7 +16,9 @@ function Footer() {
                 <FaLinkedin />
             </li>
         </ul>
-        <p><span>© 2023 Costs. Todos os direitos reservados.</span></p>
+        <p className={styles.copy_right}>
+            <span>© 2023 Costs. Todos os direitos reservados.</span>
+        </p>
        </footer>
     )
 }   
