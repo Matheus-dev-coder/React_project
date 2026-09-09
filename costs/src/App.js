@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Company from './pages/Company';
 import Contato from './pages/Contact';
 import Nemproject from './pages/Nemproject';
+import Projects from './pages/Projects';
 
 import Container from './layout/Container';
 import Navbar from './layout/Navbar';
@@ -16,6 +17,9 @@ function App() {
           <Container customClass="min-height">
             <Route exact path="/">
               <Home />
+            </Route>
+             <Route exact path="/Projects">
+              <Projects />
             </Route>
             <Route exact path="/company">
               <Company />
