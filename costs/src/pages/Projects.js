@@ -5,6 +5,7 @@ import {useState, useEffect} from "react";
 
 import Message from "../components/Message";
 import Container from "../components/Container";
+import Loading from "../layout/Loading";
 import LinkButton from "../components/LinkButton";
 import styles from "./Projects.module.css";
 import ProjectCard from "../components/project/ProjectCard";
@@ -12,6 +13,7 @@ import ProjectCard from "../components/project/ProjectCard";
 
 function Projects() {
     const [projects, setProjects] = useState([]);
+    const [removeLoading, setRemoveLoading] = useState(false);
 
     const location = useLocation();
     let message = "";
@@ -20,6 +22,7 @@ function Projects() {
     }
 
     useEffect(() => {
+      setTimeout(() => {
         fetch("http://localhost:5000/projects", {
             method: "GET",
             headers: { 
@@ -29,8 +32,10 @@ function Projects() {
         .then((resp) => resp.json())
         .then((data) => {
             setProjects(data);
+            setRemoveLoading(true);
         })
         .catch((err) => console.error(err));
+      }, 300)  
     }, []);
 
 
@@ -52,6 +57,7 @@ function Projects() {
                             key={project.id}
                         />
                     ))}
+                    {!removeLoading && <Loading />}
             </Container>
         </div>
     )
