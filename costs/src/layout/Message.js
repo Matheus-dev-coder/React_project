@@ -17,7 +17,7 @@ function Message({type, msg}) {
             setVisible(false)
         }, 3000)
 
-        return () => clearTimeout(timer)
+        return () => clearTimeout(timeout)
 
     }, [msg])
 

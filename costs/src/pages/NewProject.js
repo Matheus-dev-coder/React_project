@@ -1,8 +1,10 @@
 import { useHistory } from 'react-router-dom';
 
-import React from './NewPoject.module.css'
+import ProjectForm from '../project/ProjectForm';
 
-function Newproject() {
+import styles from './NewProject.module.css';
+
+function NewProject() {
 
   const history = useHistory();
 
@@ -38,4 +40,4 @@ function Newproject() {
   );
 }
 
-export default Newproject;
+export default NewProject;

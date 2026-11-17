@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Company from './pages/Company';
 import Contato from './pages/Contact';
-import Nemproject from './pages/Nemproject';
+import NewProject from './pages/NewProject';
 import Projects from './pages/Projects';
 
 import Container from './layout/Container';
@@ -27,8 +27,8 @@ function App() {
             <Route exact path="/contato">
               <Contato />
             </Route>
-            <Route exact path="/nemproject">
-              <Nemproject />
+            <Route exact path="/newproject">
+              <NewProject />
             </Route>
           </Container>
       </Switch>
