@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 
-import ProjectForm from '../project/ProjectForm';
+import ProjectForm from '../components/project/ProjectForm';
 
 import styles from './NewProject.module.css';
 

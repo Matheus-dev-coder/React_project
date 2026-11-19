@@ -4,6 +4,7 @@ import Company from './pages/Company';
 import Contato from './pages/Contact';
 import NewProject from './pages/NewProject';
 import Projects from './pages/Projects';
+import Project from './pages/Project';
 
 import Container from './layout/Container';
 import Navbar from './layout/Navbar';
@@ -21,14 +22,17 @@ function App() {
              <Route exact path="/Projects">
               <Projects />
             </Route>
-            <Route exact path="/company">
+            <Route  path="/company">
               <Company />
             </Route>
-            <Route exact path="/contato">
+            <Route  path="/contato">
               <Contato />
             </Route>
-            <Route exact path="/newproject">
+            <Route  path="/newproject">
               <NewProject />
+            </Route>
+            <Route  path="/project/:id">
+              <Project />
             </Route>
           </Container>
       </Switch>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import styles from './ProjectForm.module.css'
 import Input from '../form/Input'
-import Select from './form/Select'
+import Select from '../form/Select'
 import SubmitButton from '../form/SubmitButton';
 
 function ProjectForm({ handleSubmit, btnText, projectData }) {
@@ -29,7 +29,7 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
 
     function handleChange(e) {
         setProject({ ...project, [e.target.name]: e.target.value })
-        cosole.log(project)
+        console.log(project)
     }
 
     function handleCategory(e) {
