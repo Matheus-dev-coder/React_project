@@ -20,13 +20,13 @@ function NewProject() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(project),
-     }).then((resp => resp.json())
-     .then((data) => {
+     }).then((resp) => resp.json())
+       .then((data) => {
        console.log(data)
          //redirect
          history.push('/projects', {message: 'Projeto criado com sucesso!'})
       })
-     ).catch(err => console.log(err))
+     .catch(err => console.log(err))
       
   }
 
