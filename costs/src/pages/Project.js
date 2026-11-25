@@ -13,32 +13,31 @@ function Project() {
 
     const [project, setProject] = useState({})
     const [showProjectForm, setShowProjectForm] = useState(false)
+    const [showServiceForm, setShowServiceForm] = useState(false)
     const [message, setMessage] = useState()
     const [type, setType] = useState()
 
     useEffect(() => {
-     setTimeout(() => {
-            fetch(`http://localhost:5000/projects/${id}`, {
+        fetch(`http://localhost:5000/projects/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
         })
-        .then(resp => resp.json())
-        .then((data) => {
-            setProject(data)
-        })
-        .catch((err) => console.log)
-     },5000)
+            .then(resp => resp.json())
+            .then(data => setProject(data))
+            .catch(err => console.log(err))
     }, [id])
 
     function editPost(project) {
-        // budget validation
-        if(project.budget < project.cost) {
+        setMessage('')
+
+        if (project.budget < project.cost) {
             setMessage('O orçamento não pode ser menor que o custo do projeto!')
             setType('error')
             return false
         }
+
         fetch(`http://localhost:5000/projects/${project.id}`, {
             method: 'PATCH',
             headers: {
@@ -46,60 +45,88 @@ function Project() {
             },
             body: JSON.stringify(project)
         })
-        .then(resp => resp.json())
-        .then((data) => {
-            setProject(data)
-            setShowProjectForm(false)
-            setMessage('Projeto atualizado com sucesso!')
-            setType('Success')
-        })
-        .catch((err) => console.log(err))
+            .then(resp => resp.json())
+            .then(data => {
+                setProject(data)
+                setShowProjectForm(false)
+                setMessage('Projeto atualizado com sucesso!')
+                setType('success')
+            })
+            .catch(err => console.log(err))
     }
 
     function toggleProjectForm() {
         setShowProjectForm(!showProjectForm)
     }
-    return ( <>
-      {project.name ? (
-        <div calassName={styles.project_details}>
-            <Container customClass="column">
-                {message && <Message type={type} msg={message} />}
-                <div className={styles.details_container}>
-                    <h1>Projeto: {project.name}</h1>
-                <div className={styles.details_container}>
-                    <h1>Projeto: {project.name}</h1>
-                    <button className={styles.btn} onClick={toggleProjectForm}>
-                        {!showProjectForm ? 'Editar projeto' : 'Fechar'}
-                    </button>
-                    {!showProjectForm ? (
-                        <div className={styles.project_info}>
-                           <p>
-                             <span>Categorias:</span> {project.category.name} 
-                           </p> 
-                           <p>
-                             <span>Total de orçamento:</span> R${project.budget}
-                           </p>
-                           <p>
-                            <span>Total utilizado:</span> R${project.cost}
-                           </p>
-s                        </div>
-                    ): (
-                        <div className={styles.project_info}>
-                            <ProjectForm
-                             handleSubmit={editPost}
-                             btnText= "Concluir ediçaõ"
-                             projectData={project}
-                            />
+
+    function toggleServiceForm() {
+        setShowServiceForm(!showServiceForm)
+    }
+
+    return (
+        <>
+            {project.name ? (
+                <div className={styles.project_details}>
+                    <Container customClass="column">
+
+                        {message && <Message type={type} msg={message} />}
+
+                        <div className={styles.details_container}>
+                            <h1>Projeto: {project.name}</h1>
+
+                            <button className={styles.btn} onClick={toggleProjectForm}>
+                                {!showProjectForm ? 'Editar projeto' : 'Fechar'}
+                            </button>
+
+                            {!showProjectForm ? (
+                                <div className={styles.project_info}>
+                                    <p>
+                                        <span>Categoria:</span> {project.category?.name}
+                                    </p>
+                                    <p>
+                                        <span>Total de orçamento:</span> R${project.budget}
+                                    </p>
+                                    <p>
+                                        <span>Total utilizado:</span> R${project.cost}
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className={styles.project_info}>
+                                    <ProjectForm
+                                        handleSubmit={editPost}
+                                        btnText="Concluir edição"
+                                        projectData={project}
+                                    />
+                                </div>
+                            )}
                         </div>
-                    )}
+
+                        <div className={styles.service_form_container}>
+                            <h2>Adicione um serviço:</h2>
+
+                            <button className={styles.btn} onClick={toggleServiceForm}>
+                                {!showServiceForm ? 'Adicionar serviço' : 'Fechar'}
+                            </button>
+
+                            {showServiceForm && (
+                                <div className={styles.project_info}>
+                                    Formulário de serviço
+                                </div>
+                            )}
+                        </div>
+
+                        <h2>Serviços</h2>
+
+                        <Container customClass="start">
+                            <p>Itens de serviço.</p>
+                        </Container>
+
+                    </Container>
                 </div>
-            </Container>
-        </div>
-      ) : (
-        <Loading />
-      )}
-    </>
-        
+            ) : (
+                <Loading />
+            )}
+        </>
     )
 }
 
